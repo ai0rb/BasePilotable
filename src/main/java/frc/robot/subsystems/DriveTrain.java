@@ -79,8 +79,8 @@ public class DriveTrain extends SubsystemBase {
     private DifferentialDrivetrainSim m_drivetrainSim;
     private WPI_TalonFX frontLeftSimMotor; // TalonFX
     private WPI_TalonFX frontRightSimMotor;
-    private WPI_TalonFX backLeftSimMotor;
-    private WPI_TalonFX backRightSimMotor;
+    // private WPI_TalonFX backLeftSimMotor;
+    // private WPI_TalonFX backRightSimMotor;
 
     private TalonFXSimCollection frontLeftSimSensors;
     private TalonFXSimCollection frontRightSimSensors;
@@ -142,12 +142,12 @@ public class DriveTrain extends SubsystemBase {
     if (RobotBase.isSimulation()) {
       frontLeftSimMotor = new WPI_TalonFX(4); // TalonSRX here
       frontRightSimMotor = new WPI_TalonFX(3);
-      backLeftSimMotor = new WPI_TalonFX(2);
-      backRightSimMotor = new WPI_TalonFX(1);
+      // backLeftSimMotor = new WPI_TalonFX(2);
+      // backRightSimMotor = new WPI_TalonFX(1);
       frontLeftSimSensors = frontLeftSimMotor.getSimCollection();
       frontRightSimSensors = frontRightSimMotor.getSimCollection();
-      backLeftSimSensors = backLeftSimMotor.getSimCollection();
-      backRightSimSensors = backRightSimMotor.getSimCollection();
+      // backLeftSimSensors = backLeftSimMotor.getSimCollection();
+      // backRightSimSensors = backRightSimMotor.getSimCollection();
       //m_drive = new DifferentialDrive(new MotorControllerGroup(m_groupeGauche),
           //new MotorControllerGroup(m_groupeDroit));
      // m_drive.setRightSideInverted(false);
@@ -195,14 +195,14 @@ public class DriveTrain extends SubsystemBase {
     // Encoders
     frontLeftSimSensors
         .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getLeftVelocityMetersPerSecond()) / 10d));
-    backLeftSimSensors
-        .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getLeftVelocityMetersPerSecond()) / 10d));
+    // backLeftSimSensors
+    //     .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getLeftVelocityMetersPerSecond()) / 10d));
     frontLeftSimSensors.setIntegratedSensorRawPosition((int) metersToTicks(m_drivetrainSim.getLeftPositionMeters()));
     backLeftSimSensors.setIntegratedSensorRawPosition((int) metersToTicks(m_drivetrainSim.getLeftPositionMeters()));
     frontRightSimSensors
         .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getRightVelocityMetersPerSecond()) / 10d));
-    backRightSimSensors
-        .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getRightVelocityMetersPerSecond()) / 10d));
+    // backRightSimSensors
+    //     .setIntegratedSensorVelocity((int) (metersToTicks(m_drivetrainSim.getRightVelocityMetersPerSecond()) / 10d));
     frontRightSimSensors.setIntegratedSensorRawPosition((int) metersToTicks(m_drivetrainSim.getRightPositionMeters()));
     backRightSimSensors.setIntegratedSensorRawPosition((int) metersToTicks(m_drivetrainSim.getRightPositionMeters()));
     frontLeftSimSensors.setBusVoltage(RobotController.getBatteryVoltage());
@@ -226,13 +226,13 @@ public class DriveTrain extends SubsystemBase {
   }
   private double getLeftPosition() {
     if (RobotBase.isSimulation()) {
-      return (backLeftSimMotor.getSelectedSensorPosition() + frontLeftSimMotor.getSelectedSensorPosition()) / 2.0d;
+      return frontLeftSimMotor.getSelectedSensorPosition()) / 1.0d; //(backLeftSimMotor.getSelectedSensorPosition() / 2.0d
     }
     return (m_moteurAvantGauche.getSelectedSensorPosition()) / 1.0d;
   }
   private double getRightPosition() {
     if (RobotBase.isSimulation()) {
-      return (backRightSimMotor.getSelectedSensorPosition() + frontRightSimMotor.getSelectedSensorPosition()) / 2.0d;
+      return frontRightSimMotor.getSelectedSensorPosition()) / 1.0d; //(backRightSimMotor.getSelectedSensorPosition() / 2.0d
     }
     return (m_moteurAvantDroit.getSelectedSensorPosition()) / 1.0d;
   }
@@ -257,13 +257,13 @@ public class DriveTrain extends SubsystemBase {
   }
   public double getLeftVelocityTicksPerDs() {
     if (RobotBase.isSimulation()) {
-      return (frontLeftSimMotor.getSelectedSensorVelocity() + backLeftSimMotor.getSelectedSensorVelocity()) / 2.0d;
+      return (frontLeftSimMotor.getSelectedSensorVelocity() / 1.0d; // + backLeftSimMotor.getSelectedSensorVelocity()) / 2.0d
     }
     return (m_moteurAvantGauche.getSelectedSensorVelocity()) / 1.0d;
   }
   public double getRightVelocityTicksPerDs() {
     if (RobotBase.isSimulation()) {
-      return (frontRightSimMotor.getSelectedSensorVelocity() + backRightSimMotor.getSelectedSensorVelocity()) / 2.0d;
+      return (frontRightSimMotor.getSelectedSensorVelocity() + / 1.0d; //+ backRightSimMotor.getSelectedSensorVelocity()) / 2.0d
     }
     return (m_moteurAvantDroit.getSelectedSensorVelocity()) / 1.0d;
   }
@@ -329,8 +329,8 @@ public class DriveTrain extends SubsystemBase {
     if (RobotBase.isSimulation()) {
       frontLeftSimMotor.setSelectedSensorPosition(0);
       frontRightSimMotor.setSelectedSensorPosition(0);
-      backLeftSimMotor.setSelectedSensorPosition(0);
-      backRightSimMotor.setSelectedSensorPosition(0);
+      // backLeftSimMotor.setSelectedSensorPosition(0);
+      // backRightSimMotor.setSelectedSensorPosition(0);
     }
     m_moteurAvantGauche.setSelectedSensorPosition(0);
     m_moteurAvantDroit.setSelectedSensorPosition(0);
