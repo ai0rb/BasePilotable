@@ -7,6 +7,10 @@
 # Build File
 build/*
 
+# Gradle File
+.gradle/*
+*.gradle
+
 # BlueJ files
 *.ctxt
 
