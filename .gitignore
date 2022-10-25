@@ -10,6 +10,8 @@ build/*
 # Gradle File
 .gradle/*
 *.gradle
+*.lock
+*.bin
 
 # BlueJ files
 *.ctxt
