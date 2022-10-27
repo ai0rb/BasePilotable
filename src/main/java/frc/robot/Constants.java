@@ -20,8 +20,8 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     public static class Drivetrain {
         //Assignation des moteurs a leur port
-        public static final int kMoteurAvantDroitPort = 0; // reseau CAN
-        public static final int kMoteurAvantGauchePort = 0; // reseau CAN
+        public static final int kMoteurAvantDroitPort = 2; // reseau CAN
+        public static final int kMoteurAvantGauchePort = 4; // reseau CAN
         public static final int DEFAULT_SETTING_TIMEOUT_MS = 50;
         public static final double kMaxSpeed = 1.0; // 3.0
         public static final double kMaxAngularSpeed = 1.0;
