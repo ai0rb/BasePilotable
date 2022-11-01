@@ -6,10 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveRienCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -34,7 +36,8 @@ public class RobotContainer {
   public final DriveTrain m_driveTrain = new DriveTrain();
 
 
-  private final XboxController m_pilot = new XboxController(Constants.Manette.kPilotPort);
+  private final Joystick m_pilot = new Joystick(Constants.Manette.kPilotPort);
+  // private final XboxController m_pilot = new XboxController(Constants.Manette.kPilotPort);
   private final XboxController m_coPilot = new XboxController(Constants.Manette.kCoPilot);
 
   private final ExampleCommand m_autoCommand = null;
@@ -69,11 +72,12 @@ public class RobotContainer {
     Shuffleboard.getTab("Autonomous").add(autoChooser);
 
     // m_compressor.enableDigital();
-    // m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_joystick.getY(), ()->m_joystick.getX(), m_driveTrain));
+    //m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_joystick.getY(), ()->m_joystick.getX(), m_driveTrain));
+    m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_pilot.getY(), ()->m_pilot.getX(), m_driveTrain));
 
     // commenter lorsquon enrengistre
    // m_driveTrain.setDefaultCommand(new DriveCommand(()->(-0.9)*m_pilot.getRawAxis(1), ()->(0.9)*m_pilot.getRawAxis(4), m_driveTrain));
-   m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.boostDrive( m_pilot.getRightTriggerAxis(), m_pilot.getRawAxis(1),m_pilot.getRawAxis(4)), m_driveTrain));
+  // m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.boostDrive( m_pilot.getRightTriggerAxis(), m_pilot.getRawAxis(1),m_pilot.getRawAxis(4)), m_driveTrain));
 
     //m_driveTrain.setDefaultCommand(new TankDriveCommand(()->(-1)*m_joystick.getY(), ()->m_joystick.getX(), m_driveTrain));
     // m_grimpeur.setDefaultCommand(new GrimpeurSTOPCommand(m_grimpeur));
@@ -166,7 +170,7 @@ public class RobotContainer {
   }
 
 
-  public XboxController getStick() {
+  public Joystick getStick() {
     return m_pilot;
   }
 
@@ -208,7 +212,7 @@ public class RobotContainer {
   public double getAxis1(){
     return m_pilot.getRawAxis(1);
   }
-  public XboxController getJoystick(){
+  public Joystick getJoystick(){
     return m_pilot;
   }
 
