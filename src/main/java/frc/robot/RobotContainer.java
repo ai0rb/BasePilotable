@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveRienCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RunPathCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -45,30 +46,17 @@ public class RobotContainer {
   public final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   String[] oneball = {"/home/lvuser/deploy/kenzy.json"};
-  String[] AutoAvanceVersLaBalleProppre3_04_04= {"/home/lvuser/deploy/AutoAvanceVersLaBalleProppre3_04_04.json"};
-  String[] trajectoire1_04_05_2022_ReculerB = {"/home/lvuser/deploy/Trajectoire1_04_05_2022_ReculerB.json"};
-  String[] Trajectoire1_04_05_2022_AvancerB = {"/home/lvuser/deploy/Trajectoire1_04_05_2022_AvancerB.json"};
-  String[] TrajectoireDeltaReculer = {"/home/lvuser/deploy/TrajectoireDeltaReculer.json"};
-
-  String[] TrajectoireOmegaReculer = {"/home/lvuser/deploy/TrajectoireOmegaReculerReduced.json"};
-
+  String[] avance = {"/home/lvuser/deploy/AutonomeAvance.json"};
+  String[] recule = {"/home/lvuser/deploy/AutonomeRecule.json"};
+  // String[] avance = {"/home/lvuser/deploy/FirstAutonomous.json"};
   
-  String[] DerniereTrajectoire = {"/home/lvuser/deploy/DerniereTrajectoire.json"};
-
-  String[] oneballB = {"/home/lvuser/deploy/kenzyBalleB.json"} ;
-  String[] oneballC = {"/home/lvuser/deploy/kenzyBalleC.json"} ;
-
-  String[] avancerVersLaBalleC = {"/home/lvuser/deploy/avancerVersBalleCPropre.json"} ;
-  String[] reculerVersLaBalleC = {"/home/lvuser/deploy/reculerVersBalleCPropre.json"} ;
-  String[] pivoter =  {"/home/lvuser/deploy/Pivote1.json"} ;
-  
-  String[] Auto1balleEtRecul = {"/home/lvuser/deploy/Auto1balleEtRecul.json"} ;
-   
-  String[] auto1balleEtAvance = {"/home/lvuser/deploy/Auto1balleEtAvance.json"} ;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // autoChooser.addObject(name, object);
     autoChooser.setDefaultOption("Ne Fait Rien", new DriveRienCommand(m_driveTrain));
+    autoChooser.addOption("AutonomousAvance", new RunPathCommand(m_driveTrain, avance));
+    autoChooser.addOption("AutonomousRecule", new RunPathCommand(m_driveTrain, recule));
+    // autoChooser.addOption("AutonomousAvance", new RunPathCommand(m_driveTrain, avance));
     Shuffleboard.getTab("Autonomous").add(autoChooser);
 
     // m_compressor.enableDigital();
