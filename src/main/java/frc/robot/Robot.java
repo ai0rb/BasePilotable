@@ -75,11 +75,11 @@ public class Robot extends TimedRobot {
   // To which location the recordings should be stored (if a file of the same
   // name already exists (such as foobar.json), a new name will be chosen
   // (foobar(1).json, etc.))
-  String recordingURL = "/home/lvuser/AutonomeRecule.json";
+  String recordingURL = "/home/lvuser/AutonomeAvance3.json";
   // An array of which files should be played back during autonomous
   // private File deployDir = Filesystem.getDeployDirectory();
   // private File speedFile = new File(deployDir, "foobar.json");
-  String[] playbackURLs = { "/home/lvuser/AutonomeRecule.json"};
+  String[] playbackURLs = { "/home/lvuser/AutonomeAvance3.json"};
   // These variables are necessary, but need not be initialized
   long initialTime;
   Reader reader;

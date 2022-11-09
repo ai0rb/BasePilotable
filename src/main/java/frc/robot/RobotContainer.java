@@ -37,8 +37,8 @@ public class RobotContainer {
   public final DriveTrain m_driveTrain = new DriveTrain();
 
 
-  private final Joystick m_pilot = new Joystick(Constants.Manette.kPilotPort);
-  // private final XboxController m_pilot = new XboxController(Constants.Manette.kPilotPort);
+  //private final Joystick m_pilot = new Joystick(Constants.Manette.kPilotPort);
+  private final XboxController m_pilot = new XboxController(Constants.Manette.kPilotPort);
   private final XboxController m_coPilot = new XboxController(Constants.Manette.kCoPilot);
 
   private final ExampleCommand m_autoCommand = null;
@@ -48,6 +48,7 @@ public class RobotContainer {
   String[] oneball = {"/home/lvuser/deploy/kenzy.json"};
   String[] avance = {"/home/lvuser/deploy/AutonomeAvance.json"};
   String[] recule = {"/home/lvuser/deploy/AutonomeRecule.json"};
+  String[] avance2 = {"/home/lvuser/deploy/AutonomeAvance2.json"};
   // String[] avance = {"/home/lvuser/deploy/FirstAutonomous.json"};
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -56,16 +57,17 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Ne Fait Rien", new DriveRienCommand(m_driveTrain));
     autoChooser.addOption("AutonomousAvance", new RunPathCommand(m_driveTrain, avance));
     autoChooser.addOption("AutonomousRecule", new RunPathCommand(m_driveTrain, recule));
+    autoChooser.addOption("AutonomousAvance2", new RunPathCommand(m_driveTrain, avance2));
     // autoChooser.addOption("AutonomousAvance", new RunPathCommand(m_driveTrain, avance));
     Shuffleboard.getTab("Autonomous").add(autoChooser);
 
     // m_compressor.enableDigital();
     //m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_joystick.getY(), ()->m_joystick.getX(), m_driveTrain));
-    m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_pilot.getY(), ()->m_pilot.getX(), m_driveTrain));
+   // m_driveTrain.setDefaultCommand(new DriveCommand(()->(-1)*m_pilot.getY(), ()->m_pilot.getX(), m_driveTrain));
 
     // commenter lorsquon enrengistre
    // m_driveTrain.setDefaultCommand(new DriveCommand(()->(-0.9)*m_pilot.getRawAxis(1), ()->(0.9)*m_pilot.getRawAxis(4), m_driveTrain));
-  // m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.boostDrive( m_pilot.getRightTriggerAxis(), m_pilot.getRawAxis(1),m_pilot.getRawAxis(4)), m_driveTrain));
+  m_driveTrain.setDefaultCommand(new RunCommand(()->m_driveTrain.boostDrive( m_pilot.getRightTriggerAxis(), m_pilot.getRawAxis(1),m_pilot.getRawAxis(4)), m_driveTrain));
 
     //m_driveTrain.setDefaultCommand(new TankDriveCommand(()->(-1)*m_joystick.getY(), ()->m_joystick.getX(), m_driveTrain));
     // m_grimpeur.setDefaultCommand(new GrimpeurSTOPCommand(m_grimpeur));
@@ -158,7 +160,7 @@ public class RobotContainer {
   }
 
 
-  public Joystick getStick() {
+  public XboxController getStick() {
     return m_pilot;
   }
 
@@ -200,7 +202,7 @@ public class RobotContainer {
   public double getAxis1(){
     return m_pilot.getRawAxis(1);
   }
-  public Joystick getJoystick(){
+  public XboxController getJoystick(){
     return m_pilot;
   }
 
