@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.playback.Reader;
 import frc.robot.playback.Recorder;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.TimedRobot;
 // import frc.robot.subsystems.DriveTrain;
 // import edu.wpi.first.networktables.NetworkTableInstance;
 // import edu.wpi.first.wpilibj.Filesystem;
@@ -117,16 +119,7 @@ public class Robot extends TimedRobot {
     // cameraSelection =
     // NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
 
-    camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
-
-    camera1.setResolution(120, 160);
-    camera2.setResolution(120, 160);
-
-    server = CameraServer.getServer();
-
-    camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    CameraServer.startAutomaticCapture();
   }
 
   /**
