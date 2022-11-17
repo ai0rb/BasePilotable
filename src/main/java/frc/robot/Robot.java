@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.playback.Reader;
 import frc.robot.playback.Recorder;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.TimedRobot;
 // import frc.robot.subsystems.DriveTrain;
 // import edu.wpi.first.networktables.NetworkTableInstance;
 // import edu.wpi.first.wpilibj.Filesystem;
@@ -71,15 +73,15 @@ public class Robot extends TimedRobot {
   // private final Drivetrain m_drive = new Drivetrain();
   // private final Joystick m_joystick = new Joystick(0);
   // Here are the options for using recordable autonomous mode.
-  private boolean record = false, play = false;
+  private boolean record = false, play = true;
   // To which location the recordings should be stored (if a file of the same
   // name already exists (such as foobar.json), a new name will be chosen
   // (foobar(1).json, etc.))
-  String recordingURL = "/home/lvuser/Der.json";
+  String recordingURL = "/home/lvuser/AutonomeAvance3.json";
   // An array of which files should be played back during autonomous
   // private File deployDir = Filesystem.getDeployDirectory();
   // private File speedFile = new File(deployDir, "foobar.json");
-  String[] playbackURLs = { "/home/lvuser/Trajectoire1_04_05_2022_ReculerC.json"};
+  String[] playbackURLs = { "/home/lvuser/AutonomeAvance3.json"};
   // These variables are necessary, but need not be initialized
   long initialTime;
   Reader reader;
@@ -117,16 +119,7 @@ public class Robot extends TimedRobot {
     // cameraSelection =
     // NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
 
-    camera1 = CameraServer.startAutomaticCapture(0);
-    camera2 = CameraServer.startAutomaticCapture(1);
-
-    camera1.setResolution(120, 160);
-    camera2.setResolution(120, 160);
-
-    server = CameraServer.getServer();
-
-    camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-    camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
+    CameraServer.startAutomaticCapture();
   }
 
   /**
@@ -251,17 +244,17 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //Pour enregistrement
-    //------------------------------------------------------------------------------------------------------------
-    //if (recorder != null) {
+    // Pour enregistrement
+    // ------------------------------------------------------------------------------------------------------------
+    if (recorder != null) {
      
-    //  Object[] input = new Object[] { (-0.7) * m_robotContainer.getJoystick().getRawAxis(1),
-    //      (0.7) * m_robotContainer.getJoystick().getRawAxis(4), 0.0, 0.0 };
+     Object[] input = new Object[] { (-0.7) * m_robotContainer.getJoystick().getRawAxis(1),
+         (0.7) * m_robotContainer.getJoystick().getRawAxis(4), 0.0, 0.0 };
       // Do stuff to drive with the inputs.
-    //  m_robotContainer.m_driveTrain.curvatureDriveV2((Double) input[0], (Double) input[1], true);
+     m_robotContainer.m_driveTrain.curvatureDriveV2((Double) input[0], (Double) input[1], true);
 
-     // recorder.appendData(input);
-   //}
+     recorder.appendData(input);
+   }
     //------------------------------------------------------------------------------------------------------------
 //Pour le boost
 // if (m_robotContainer.getJoystick().getRightTriggerAxis() > 0.5) {
